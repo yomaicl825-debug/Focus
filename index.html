@@ -1,0 +1,642 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#101b2b" />
+    <meta name="description" content="随时开始舒尔特方格、呼吸重置和颜色干扰训练，离线也能使用。" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <style>:root{font-family:'DM Sans','Noto Sans SC',system-ui,sans-serif;color:#eaf2f1;background:#101b2b;font-synthesis:none}*{box-sizing:border-box}body{margin:0;min-width:320px}button{font:inherit;cursor:pointer}button:focus-visible{outline:2px solid #b6f36a;outline-offset:3px}.app-shell{min-height:100vh;min-height:100dvh;background:radial-gradient(circle at 83% 0%,#1c3547 0,transparent 34%),#101b2b}.topbar{height:80px;display:flex;align-items:center;justify-content:space-between;padding:0 42px;border-bottom:1px solid #ffffff12}.brand{display:flex;align-items:center;gap:13px;border:0;background:none;color:#f1f6f6;text-align:left;font-size:19px;font-weight:800;letter-spacing:.02em;padding:0}.brand-light{font-weight:500}.brand small{display:block;color:#7d9aa5;font-size:9px;font-weight:700;letter-spacing:.27em;margin-top:2px}.brand-symbol{display:grid;grid-template-columns:repeat(2,10px);gap:3px;transform:rotate(-11deg)}.brand-symbol i{height:10px;background:#b6f36a;border-radius:2px}.brand-symbol i:last-child{background:#80d8d1;border-radius:50%}.top-actions{display:flex;gap:23px;align-items:center}.offline-label{display:flex;align-items:center;gap:8px;color:#a9c0c8;font-size:13px}.offline-label>span{height:7px;width:7px;border-radius:50%;background:#b6f36a;box-shadow:0 0 12px #b6f36a}.install-btn{border:1px solid #8fe2d4;color:#b8f4e7;background:#ffffff0a;border-radius:9px;padding:9px 13px;font-size:13px}.install-btn[hidden]{display:none}.layout{display:grid;grid-template-columns:242px minmax(0,1fr);min-height:calc(100vh - 80px);min-height:calc(100dvh - 80px)}.sidebar{border-right:1px solid #ffffff12;padding:31px 16px;display:flex;flex-direction:column}.nav-label{color:#6d8995;font-size:11px;font-weight:700;letter-spacing:.16em;padding:0 17px;margin:0 0 14px}.nav-item{height:46px;border:0;background:none;color:#9eb2bd;display:flex;align-items:center;gap:14px;text-align:left;padding:0 16px;border-radius:9px;font-size:14px;font-weight:600;margin-bottom:4px}.nav-item>span{font-size:20px;width:22px;text-align:center;font-weight:400}.nav-item:hover,.nav-item.active{background:#b6f36a14;color:#d8fac1}.nav-item.active{box-shadow:inset 3px 0 #b6f36a}.nav-separator{height:1px;background:#ffffff11;margin:26px 10px 25px}.sidebar-bottom{margin:auto 10px 0;background:linear-gradient(150deg,#243d4b,#1a3040);border:1px solid #ffffff0c;border-radius:15px;padding:20px}.sidebar-bottom strong{font-size:14px}.sidebar-bottom p{color:#95acb6;font-size:12px;line-height:1.7;margin:8px 0 0}.mini-graphic{height:50px;display:flex;align-items:end;gap:5px;margin-bottom:15px}.mini-graphic span{display:block;width:7px;background:#b6f36a;border-radius:5px}.mini-graphic span:nth-child(1){height:18px}.mini-graphic span:nth-child(2){height:33px}.mini-graphic span:nth-child(3){height:23px}.mini-graphic span:nth-child(4){height:43px}.mini-graphic span:nth-child(5){height:29px}.mini-graphic span:nth-child(6){height:38px}.mini-graphic span:nth-child(7){height:23px}.main-content{padding:43px clamp(24px,4.4vw,72px) 55px;max-width:1580px;width:100%;margin:0 auto}.section-heading{display:flex;justify-content:space-between;align-items:center;margin-bottom:35px}.eyebrow{color:#b6f36a;font-size:11px;letter-spacing:.22em;font-weight:700;margin-bottom:11px}.section-heading h1{font-size:clamp(27px,3vw,39px);line-height:1.2;margin:0 0 10px;font-weight:700;letter-spacing:-.03em}.section-heading p{color:#9fb5be;font-size:15px;margin:0}.section-mark{font-size:52px;line-height:1;color:#b6f36a2b;font-weight:700;letter-spacing:-.1em}.section-mark span{font-size:20px;color:#84a0a9;letter-spacing:0;margin-left:4px}.workspace{display:grid;grid-template-columns:minmax(252px,310px) minmax(0,1fr);gap:22px;align-items:start}.control-panel,.game-panel,.exercise-card,.history-panel{border:1px solid #ffffff16;background:#172638;border-radius:17px;box-shadow:0 22px 60px #07121c28}.control-panel{padding:23px}.panel-title{display:flex;justify-content:space-between;align-items:center;font-size:15px;font-weight:700;margin-bottom:18px}.panel-title span{font-size:11px;color:#668998;font-weight:600;letter-spacing:.04em}.mode-list{display:grid;gap:8px}.mode-btn{border:1px solid #ffffff12;background:#1c2e40;color:#dce9e8;border-radius:10px;padding:11px;display:flex;align-items:center;text-align:left;gap:10px;width:100%;min-height:60px}.mode-btn.selected{border-color:#b6f36a8a;background:#b6f36a0e}.mode-btn:hover{border-color:#b6f36a70}.mode-icon{height:32px;width:32px;border-radius:8px;background:#2d4653;display:grid;place-items:center;color:#b6f36a;font-size:19px;flex:none}.mode-btn strong{display:block;font-size:13px;font-weight:700}.mode-btn small{display:block;color:#89a2af;font-size:10px;line-height:1.4;margin-top:2px}.mode-check{margin-left:auto;color:#b6f36a;font-size:18px}.size-head{display:flex;justify-content:space-between;color:#d2dfdf;font-size:13px;font-weight:600;margin:28px 0 11px}.size-head span:last-child{color:#b6f36a}.size-options{display:grid;grid-template-columns:repeat(4,1fr);gap:7px}.size-btn{padding:10px 0;border:1px solid #ffffff18;background:#1c2e40;color:#9db2bb;border-radius:8px;font-size:12px;white-space:nowrap}.size-btn.selected{background:#b6f36a;color:#152620;border-color:#b6f36a;font-weight:800}.tip{display:flex;align-items:start;gap:11px;color:#8fa9b3;font-size:11px;line-height:1.65;border-top:1px solid #ffffff13;margin-top:25px;padding-top:19px}.tip-icon{font-size:18px;color:#b6f36a;line-height:1}.game-panel{padding:25px 30px 22px}.game-top{display:flex;align-items:start;justify-content:space-between;margin-bottom:22px}.stat-label{display:block;color:#809fac;font-size:11px;font-weight:700;letter-spacing:.12em;margin-bottom:8px}.next-target{display:flex;align-items:center;gap:10px;color:#d8f7bf;font-size:32px;line-height:1.1;font-weight:800;min-height:36px}.target-dot{width:11px;height:11px;border-radius:50%;background:#b6f36a}.target-dot.red{background:#fa746d}.target-dot.blue{background:#73bcff}.game-metrics{display:flex;gap:35px}.game-metrics strong{font-size:21px;font-weight:700;white-space:nowrap}.grid-wrap{max-width:500px;margin:auto}.game-grid{display:grid;grid-template-columns:repeat(var(--size),1fr);gap:8px;aspect-ratio:1}.grid-cell{font-size:22px;border:1px solid #476477;background:#274257;color:#f4f9f8;border-radius:9px;min-width:0;font-size:clamp(18px,2.4vw,28px);font-weight:700;transition:transform .12s,background .15s,opacity .15s;touch-action:manipulation;user-select:none}.grid-cell:hover:not(:disabled){background:#335c6e;transform:translateY(-2px)}.grid-cell:active{transform:scale(.96)}.grid-cell.red{color:#ffaba4}.grid-cell.blue{color:#9bd0ff}.grid-cell.found{opacity:.24;background:#203547;color:#7694a0}.grid-cell.wrong{animation:wrong .35s;border-color:#fa746d;background:#853d47}@keyframes wrong{50%{transform:translateX(4px)}}.game-footer{margin-top:25px}.progress-copy{display:flex;justify-content:space-between;font-size:12px;color:#91abb5}.progress-copy strong{color:#dce8e7}.progress-track{height:5px;background:#2a4251;border-radius:6px;margin-top:11px;overflow:hidden}.progress-track span{display:block;height:100%;background:#b6f36a;border-radius:6px;transition:width .2s}.game-actions{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-top:24px}.button-primary{display:flex;justify-content:space-between;align-items:center;gap:35px;border:0;border-radius:9px;padding:13px 17px;background:#b6f36a;color:#173022;font-weight:800;font-size:13px}.button-primary:hover{background:#c9ff85}.button-primary span{font-size:19px;font-weight:500;line-height:1}.game-actions>span{color:#8da8b2;font-size:11px;text-align:right}.game-actions b{color:#d8e9e8;font-size:13px;margin-left:6px}.result-toast{position:fixed;right:25px;bottom:25px;z-index:4;display:flex;align-items:center;gap:12px;background:#c7f78b;color:#193123;border-radius:13px;padding:14px 16px;box-shadow:0 20px 50px #0007}.result-toast>span{font-size:24px}.result-toast strong,.result-toast small{display:block}.result-toast small{margin-top:3px}.result-toast button{border:0;background:transparent;color:#193123;font-size:24px;margin-left:12px}.exercise-card{max-width:760px;margin:auto;padding:28px;text-align:center;min-height:570px}.exercise-kicker{text-align:left;color:#b6f36a;font-size:12px;font-weight:700;letter-spacing:.09em}.breath-visual{display:grid;place-items:center;height:380px}.breath-ring{width:285px;height:285px;max-width:62vw;max-height:62vw;width:min(62vw,285px);height:min(62vw,285px);border:1px solid #76ddd360;border-radius:50%;display:grid;place-items:center;box-shadow:0 0 0 18px #70ddd20c,0 0 0 47px #70ddd208,inset 0 0 65px #72ded225;background:radial-gradient(circle,#315666,#1d3749);transition:transform 4s ease-in-out}.breath-ring.active{animation:breathe 8s ease-in-out infinite}@keyframes breathe{0%,100%{transform:scale(.8)}50%{transform:scale(1)}}.breath-core span,.breath-core small{display:block;color:#a7d8d7;font-size:17px}.breath-core strong{display:block;font-size:73px;line-height:1.25;color:#e9fff2}.breath-core small{font-size:12px}.exercise-note{color:#9fb5be;font-size:14px;margin:4px auto 22px;line-height:1.6}.exercise-action{margin:auto;min-width:180px}.stroop-card{min-height:570px}.stroop-meta{display:flex;justify-content:space-between;color:#a5bac1;font-size:13px;margin:35px 0 15px}.stroop-meta strong{color:#e9f6ee;font-size:19px;margin:0 4px}.stroop-word{font-size:clamp(100px,16vw,160px);font-weight:800;line-height:1.5;margin:10px 0 20px}.stroop-options{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.stroop-option{padding:14px;border:1px solid #ffffff29;background:#223b4d;color:#eff6f5;border-radius:10px;font-size:16px;font-weight:700}.stroop-option:hover:not(:disabled){background:#335a6a}.stroop-option:disabled{opacity:.45;cursor:not-allowed}.stroop-option span{display:inline-block;height:12px;width:12px;border-radius:50%;margin-right:8px}.stroop-card .exercise-note{margin:30px 0 22px}.history-panel{max-width:800px;margin:auto;padding:14px 25px}.history-row{display:flex;align-items:center;gap:15px;padding:17px 0;border-bottom:1px solid #ffffff14}.history-row:last-child{border-bottom:0}.history-glyph{width:40px;height:40px;border-radius:9px;background:#b6f36a18;color:#b6f36a;display:grid;place-items:center;font-size:23px}.history-row div{flex:1}.history-row strong,.history-row small{display:block}.history-row strong{font-size:14px}.history-row small{color:#829da7;font-size:12px;margin-top:5px}.history-row b{font-size:17px;color:#b6f36a}.empty-history{text-align:center;padding:70px 15px}.empty-history span{display:block;font-size:38px;color:#b6f36a;margin-bottom:16px}.empty-history strong{font-size:19px}.empty-history p{color:#91aab3;font-size:14px}.mobile-nav{display:none}@media(max-width:1050px){.workspace{grid-template-columns:260px minmax(0,1fr)}.main-content{padding:37px 25px}.game-panel{padding:22px}.game-grid{gap:6px}}@media(max-width:760px){.topbar{height:65px;padding:0 18px}.brand{font-size:16px}.offline-label{display:none}.layout{display:block;min-height:calc(100dvh - 65px)}.sidebar{display:none}.main-content{padding:24px 16px 100px}.section-heading{margin-bottom:20px}.section-heading h1{font-size:28px}.section-heading p{font-size:13px}.section-mark{font-size:39px}.workspace{display:flex;flex-direction:column-reverse;gap:17px}.control-panel,.game-panel{width:100%}.control-panel{padding:17px}.mode-list{grid-template-columns:repeat(2,1fr)}.mode-btn{min-height:64px}.mode-btn small{font-size:9px}.mode-check{display:none}.game-panel{padding:17px}.game-top{margin-bottom:15px}.game-metrics{gap:17px}.game-metrics strong{font-size:17px}.next-target{font-size:25px}.grid-wrap{max-width:min(100%,480px)}.grid-cell{font-size:clamp(18px,5vw,27px)}.game-grid{gap:6px}.game-footer{margin-top:19px}.game-actions{margin-top:17px}.mobile-nav{display:flex;position:fixed;bottom:0;left:0;right:0;height:calc(66px + env(safe-area-inset-bottom));padding:5px 8px env(safe-area-inset-bottom);background:#142536f5;border-top:1px solid #ffffff24;z-index:3;backdrop-filter:blur(18px)}.mobile-nav button{flex:1;border:0;background:none;color:#8da7b2;font-size:11px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:2px}.mobile-nav button span{font-size:23px;line-height:1}.mobile-nav button.active{color:#b6f36a}.exercise-card{padding:18px;min-height:520px}.breath-visual{height:340px}.stroop-word{font-size:110px}.stroop-options{gap:6px}.stroop-option{padding:13px 5px}.result-toast{left:16px;right:16px;bottom:85px}}@media(max-width:380px){.game-grid{gap:4px}.grid-cell{border-radius:6px}.mode-btn{padding:8px;gap:6px}.mode-icon{width:28px;height:28px;font-size:16px}.mode-btn strong{font-size:12px}.game-actions>span{font-size:10px}}@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+
+/* Extended Schulte layouts */
+.size-options{grid-template-columns:repeat(6,minmax(0,1fr));gap:5px}
+.size-btn{font-size:11px;padding:9px 0}
+.layout-heading{display:flex;align-items:center;justify-content:space-between;margin:27px 0 12px;font-size:13px;font-weight:700;color:#dce9e8}
+.layout-heading span:last-child{font-size:11px;color:#668998;font-weight:600;letter-spacing:.04em}
+.layout-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+.layout-btn{display:flex;align-items:center;gap:8px;min-width:0;min-height:58px;padding:8px;border:1px solid #ffffff16;border-radius:9px;background:#1c2e40;color:#dce9e8;text-align:left}
+.layout-btn:hover{border-color:#b6f36a70}
+.layout-btn.selected{border-color:#b6f36a8a;background:#b6f36a0e}
+.layout-icon{flex:none;display:grid;place-items:center;width:27px;height:27px;border-radius:7px;background:#2d4653;color:#b6f36a;font-size:18px}
+.layout-btn strong{display:block;font-size:11px;line-height:1.35;white-space:nowrap}
+.layout-btn small{display:block;margin-top:2px;font-size:10px;line-height:1.3;color:#8ba4af;white-space:nowrap}
+.game-panel.dense .game-grid{gap:4px}
+.game-panel.dense .grid-cell{font-size:clamp(14px,1.7vw,22px)}
+.game-grid.geometric{position:relative;display:block;isolation:isolate}
+.game-grid.geometric .grid-cell{position:absolute;left:var(--x);top:var(--y);width:var(--cell-size);height:var(--cell-size);min-height:0;transform:translate(-50%,-50%);border-radius:50%;z-index:1}
+.game-grid.geometric .grid-cell:hover:not(:disabled){transform:translate(-50%,-50%) scale(1.05)}
+.game-grid.geometric .grid-cell:active{transform:translate(-50%,-50%) scale(.96)}
+.game-grid.layout-irregular .grid-cell{border-radius:20% 32% 24% 28%}
+.game-grid.layout-stagger .grid-cell{border-radius:10px}
+.game-grid.layout-rings{background:repeating-radial-gradient(circle at center,#ffffff14 0 1px,transparent 1px 10%);border-radius:50%}
+.game-grid.layout-rings .grid-cell{border-radius:50%}
+.game-grid.layout-circle{background:radial-gradient(circle at center,#80d8d10e,transparent 70%);border-radius:50%}
+.game-grid.layout-honeycomb .grid-cell{border-radius:0;clip-path:polygon(25% 0,75% 0,100% 50%,75% 100%,25% 100%,0 50%);border:0;background:#315166}
+.game-grid.layout-honeycomb .grid-cell.found{background:#203547}
+
+.game-grid.layout-dynamic .grid-cell{transition:background .15s,opacity .15s}
+@media(max-width:760px){.layout-list{grid-template-columns:repeat(2,minmax(0,1fr))}.layout-btn{min-height:52px}.game-panel.dense{padding:12px}.game-panel.dense .game-grid{gap:3px}.game-panel.dense .grid-cell{font-size:clamp(13px,3.7vw,17px)}}
+
+/* Shared-edge boards: Voronoi pieces, regular hexagons, rotating annular sectors */
+.shape-board{display:block;width:100%;height:auto;aspect-ratio:1;background:#203547;border:1px solid #496171;border-radius:10px;overflow:visible;touch-action:manipulation}
+.shape-board.layout-irregular{border-radius:7px}
+.shape-board.layout-honeycomb,.shape-board.ring-board{background:transparent;border:0}
+.shape-board .svg-cell{cursor:pointer;outline:none;touch-action:manipulation}
+.shape-board .svg-cell polygon,.shape-board .svg-cell path{fill:#2c4a5e;stroke:#16293a;stroke-width:3;stroke-linejoin:round;transition:fill .15s}
+.shape-board.layout-irregular .svg-cell:nth-child(3n) polygon{fill:#315267}
+.shape-board.layout-irregular .svg-cell:nth-child(5n) polygon{fill:#29465a}
+.shape-board.layout-honeycomb .svg-cell polygon{fill:#315267;stroke:#172638;stroke-width:2}
+.shape-board .svg-cell:hover polygon,.shape-board .svg-cell:hover path{fill:#3b6578}
+.shape-board .svg-cell:focus-visible polygon,.shape-board .svg-cell:focus-visible path{stroke:#b6f36a;stroke-width:6}
+.shape-board .svg-cell text{fill:#f4f9f8;font-size:var(--svg-font);font-weight:700;font-family:'DM Sans','Noto Sans SC',system-ui,sans-serif;text-anchor:middle;dominant-baseline:central;pointer-events:none;user-select:none}
+.shape-board .svg-cell.red text{fill:#ffaba4}
+.shape-board .svg-cell.blue text{fill:#9bd0ff}
+.shape-board .svg-cell.found polygon,.shape-board .svg-cell.found path{fill:#1e3444}
+.shape-board .svg-cell.found text{fill:#7895a1}
+.shape-board .svg-cell.wrong polygon,.shape-board .svg-cell.wrong path{fill:#853d47}
+.shape-board .ring-center{fill:#132536;stroke:#80d8d155;stroke-width:3}
+.ring-layer{transform-origin:50% 50%;transform-box:view-box}
+.ring-layer.spinning{animation:ring-turn var(--duration) linear infinite;animation-delay:var(--offset)}
+.ring-layer.spinning.reverse{animation-direction:reverse}
+.ring-layer.spinning .ring-label{animation:ring-turn var(--duration) linear infinite;animation-delay:var(--offset)}
+.ring-layer.spinning.forward .ring-label{animation-direction:reverse}
+.ring-layer.spinning.reverse .ring-label{animation-direction:normal}
+.ring-label{transform-origin:var(--ox) var(--oy);transform-box:view-box}
+@keyframes ring-turn{to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){.ring-layer.spinning,.ring-layer.spinning .ring-label{animation:none!important}}
+</style>
+    <title>聚焦练习室 · Focus Lab</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script>(() => {
+  // src/game.js
+  function letterLabel(index) {
+    let value = index + 1;
+    let label = "";
+    while (value > 0) {
+      value--;
+      label = String.fromCharCode(65 + value % 26) + label;
+      value = Math.floor(value / 26);
+    }
+    return label;
+  }
+  function shuffle(items) {
+    const result = [...items];
+    for (let i = result.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [result[i], result[j]] = [result[j], result[i]];
+    }
+    return result;
+  }
+  function makeSequence(mode, size) {
+    const count = size * size;
+    if (mode === "letters") return Array.from({ length: count }, (_, i) => ({ id: "letter-".concat(i), value: letterLabel(i), color: "plain" }));
+    if (mode === "desc") return Array.from({ length: count }, (_, i) => ({ id: "number-".concat(count - i), value: count - i, color: "plain" }));
+    if (mode === "alternate") {
+      let red = 1;
+      let blue = Math.floor(count / 2);
+      return Array.from({ length: count }, (_, i) => i % 2 === 0 ? { id: "red-".concat(red), value: red++, color: "red" } : { id: "blue-".concat(blue), value: blue--, color: "blue" });
+    }
+    return Array.from({ length: count }, (_, i) => ({ id: "number-".concat(i + 1), value: i + 1, color: "plain" }));
+  }
+  function getNextTarget(sequence, index) {
+    var _a;
+    return (_a = sequence[index]) != null ? _a : null;
+  }
+  function formatTime(ms) {
+    const tenths = Math.floor(Math.max(0, ms) / 100);
+    const minutes = Math.floor(tenths / 600);
+    const seconds = Math.floor(tenths % 600 / 10);
+    return "".concat(String(minutes).padStart(2, "0"), ":").concat(String(seconds).padStart(2, "0"), ".").concat(tenths % 10);
+  }
+
+  // src/layouts.js
+  var LAYOUTS = Object.freeze([
+    { id: "classic", name: "\u6807\u51C6\u65B9\u683C", hint: "\u6574\u9F50\u6392\u5217", icon: "\u25A6", level: 1 },
+    { id: "stagger", name: "\u4EA4\u9519\u65B9\u683C", hint: "\u884C\u5217\u9519\u4F4D", icon: "\u25A5", level: 1 },
+    { id: "irregular", name: "\u4E0D\u89C4\u5219\u8212\u5C14\u7279", hint: "\u6574\u5757\u5207\u5206", icon: "\u283F", level: 2 },
+    { id: "rings", name: "\u5706\u73AF\u8212\u5C14\u7279", hint: "\u6247\u533A\u7F13\u6162\u65CB\u8F6C", icon: "\u25CE", level: 2 },
+    { id: "honeycomb", name: "\u8702\u7A9D\u8212\u5C14\u7279", hint: "\u6B63\u516D\u8FB9\u5F62\u76F8\u8D34", icon: "\u2B21", level: 2 },
+    { id: "full-random", name: "\u5168\u968F\u673A\u8212\u5C14\u7279", hint: "\u6BCF\u6B21\u70B9\u51FB\uFF0C\u5168\u76D8\u91CD\u6392", icon: "\u2928", level: 3 },
+    { id: "circle", name: "\u5706\u5F62\u4E0D\u89C4\u5219", hint: "\u5706\u57DF\u6563\u70B9", icon: "\u25C9", level: 3 },
+    { id: "dynamic", name: "\u52A8\u6001\u8212\u5C14\u7279", hint: "\u627E\u5BF9\u540E\u91CD\u65B0\u6392\u5217", icon: "\u21BB", level: 3 }
+  ]);
+  var GOLDEN_ANGLE = Math.PI * (3 - Math.sqrt(5));
+  var clamp = (value) => Math.max(0.04, Math.min(0.96, value));
+  function gridPositions(size, jitter = 0, random = Math.random) {
+    return Array.from({ length: size * size }, (_, index) => {
+      const row = Math.floor(index / size), col = index % size;
+      return {
+        x: clamp((col + 0.5 + (random() - 0.5) * jitter) / size),
+        y: clamp((row + 0.5 + (random() - 0.5) * jitter) / size)
+      };
+    });
+  }
+  function offsetPositions(size, amount) {
+    const pitch = 0.9 / (size + amount);
+    return Array.from({ length: size * size }, (_, index) => {
+      const row = Math.floor(index / size), col = index % size;
+      return { x: clamp(0.05 + (col + 0.5 + row % 2 * amount) * pitch), y: clamp((row + 0.5) / size) };
+    });
+  }
+  function sunflowerPositions(size, irregular, random) {
+    const count = size * size;
+    const maxRadius = 0.5 - 0.4 / size;
+    return Array.from({ length: count }, (_, index) => {
+      const angle = index * GOLDEN_ANGLE + (irregular ? Math.sin(index * 1.7) * 0.018 + (random() - 0.5) * 6e-3 : 0);
+      const radius = maxRadius * Math.sqrt((index + 0.5) / count) + (irregular ? Math.sin(index * 2.3) * 15e-4 : 0);
+      return { x: clamp(0.5 + radius * Math.cos(angle)), y: clamp(0.5 + radius * Math.sin(angle)) };
+    });
+  }
+  function makeVoronoiCells(sites) {
+    const square = [{ x: 0, y: 0 }, { x: 1, y: 0 }, { x: 1, y: 1 }, { x: 0, y: 1 }];
+    return sites.map((site, index) => {
+      let polygon = square;
+      for (let otherIndex = 0; otherIndex < sites.length; otherIndex++) {
+        if (otherIndex === index || polygon.length === 0) continue;
+        const other = sites[otherIndex];
+        const normalX = other.x - site.x, normalY = other.y - site.y;
+        const midX = (site.x + other.x) / 2, midY = (site.y + other.y) / 2;
+        const distance = (point) => (point.x - midX) * normalX + (point.y - midY) * normalY;
+        const clipped = [];
+        for (let i = 0; i < polygon.length; i++) {
+          const a = polygon[i], b = polygon[(i + 1) % polygon.length];
+          const da = distance(a), db = distance(b);
+          const insideA = da <= 1e-12, insideB = db <= 1e-12;
+          if (insideA) clipped.push(a);
+          if (insideA !== insideB) {
+            const t = da / (da - db);
+            clipped.push({ x: a.x + (b.x - a.x) * t, y: a.y + (b.y - a.y) * t });
+          }
+        }
+        polygon = clipped;
+      }
+      return { center: site, polygon };
+    });
+  }
+  function makeHoneycombCells(size) {
+    const root3 = Math.sqrt(3);
+    const radius = Math.min(0.94 / (root3 * (size + 0.5)), 0.94 / (1.5 * (size - 1) + 2));
+    const width = root3 * radius;
+    const totalWidth = (size + 0.5) * width;
+    const totalHeight = (1.5 * (size - 1) + 2) * radius;
+    const left = (1 - totalWidth) / 2 + width / 2;
+    const top = (1 - totalHeight) / 2 + radius;
+    return Array.from({ length: size * size }, (_, index) => {
+      const row = Math.floor(index / size), col = index % size;
+      const center = { x: left + (col + row % 2 * 0.5) * width, y: top + row * 1.5 * radius };
+      const polygon = Array.from({ length: 6 }, (_2, corner) => {
+        const angle = -Math.PI / 2 + corner * Math.PI / 3;
+        return { x: center.x + radius * Math.cos(angle), y: center.y + radius * Math.sin(angle) };
+      });
+      return { center, polygon };
+    });
+  }
+  function sectorPath(inner, outer, start, end) {
+    const p = (r, angle) => [((0.5 + r * Math.cos(angle)) * 1e3).toFixed(3), ((0.5 + r * Math.sin(angle)) * 1e3).toFixed(3)];
+    const [x1, y1] = p(inner, start), [x2, y2] = p(outer, start);
+    const [x3, y3] = p(outer, end), [x4, y4] = p(inner, end);
+    const large = end - start > Math.PI ? 1 : 0;
+    return "M ".concat(x1, " ").concat(y1, " L ").concat(x2, " ").concat(y2, " A ").concat((outer * 1e3).toFixed(3), " ").concat((outer * 1e3).toFixed(3), " 0 ").concat(large, " 1 ").concat(x3, " ").concat(y3, " L ").concat(x4, " ").concat(y4, " A ").concat((inner * 1e3).toFixed(3), " ").concat((inner * 1e3).toFixed(3), " 0 ").concat(large, " 0 ").concat(x1, " ").concat(y1, " Z");
+  }
+  function makeRingSectors(size) {
+    const ringCount = Math.max(2, Math.ceil(size / 2));
+    const count = size * size;
+    const weights = Array.from({ length: ringCount }, (_, i) => 2 * i + 1);
+    const denominator = ringCount * ringCount;
+    const slots = weights.map((weight) => Math.floor(count * weight / denominator));
+    let remainder = count - slots.reduce((sum, value) => sum + value, 0);
+    const order = weights.map((weight, i) => ({ i, fraction: count * weight / denominator - slots[i] })).sort((a, b) => b.fraction - a.fraction);
+    for (let i = 0; i < remainder; i++) slots[order[i].i]++;
+    if (slots[0] < 3) {
+      slots[0] = 3;
+      slots[slots.length - 1] -= 1;
+    }
+    const sectors = [];
+    for (let ring = 0; ring < ringCount; ring++) {
+      const inner = 0.07 + ring * 0.4 / ringCount;
+      const outer = 0.07 + (ring + 1) * 0.4 / ringCount;
+      const duration = [84, 117, 153, 198][ring];
+      const direction = ring % 2 === 0 ? 1 : -1;
+      for (let index = 0; index < slots[ring]; index++) {
+        const start = -Math.PI / 2 + index * 2 * Math.PI / slots[ring];
+        const end = -Math.PI / 2 + (index + 1) * 2 * Math.PI / slots[ring];
+        const mid = (start + end) / 2, radius = (inner + outer) / 2;
+        sectors.push({
+          ring,
+          index,
+          inner,
+          outer,
+          start,
+          end,
+          duration,
+          direction,
+          center: { x: 0.5 + radius * Math.cos(mid), y: 0.5 + radius * Math.sin(mid) },
+          path: sectorPath(inner, outer, start, end)
+        });
+      }
+    }
+    return sectors;
+  }
+  function makeLayoutPositions(layoutId, size, random = Math.random) {
+    if (!Number.isInteger(size) || size < 3 || size > 8) throw new RangeError("size must be 3\u20138");
+    switch (layoutId) {
+      case "classic":
+      case "dynamic":
+      case "full-random":
+        return gridPositions(size);
+      case "stagger":
+        return offsetPositions(size, 0.35);
+      case "irregular":
+        return gridPositions(size, 0.55, random);
+      case "rings":
+        return makeRingSectors(size).map((sector) => sector.center);
+      case "honeycomb":
+        return makeHoneycombCells(size).map((cell) => cell.center);
+      case "circle":
+        return sunflowerPositions(size, true, random);
+      default:
+        throw new RangeError("Unknown layout: ".concat(layoutId));
+    }
+  }
+  function reshuffleRemaining(board, sequence, completedCount, random = Math.random) {
+    const completed = new Set(sequence.slice(0, completedCount).map((item) => item.id));
+    const slots = board.map((item, index) => completed.has(item.id) ? -1 : index).filter((index) => index >= 0);
+    if (slots.length < 2) return [...board];
+    const values = slots.map((index) => board[index]);
+    for (let i = values.length - 1; i > 0; i--) {
+      const j = Math.floor(random() * (i + 1));
+      [values[i], values[j]] = [values[j], values[i]];
+    }
+    if (values.every((item, index) => item.id === board[slots[index]].id)) [values[0], values[1]] = [values[1], values[0]];
+    const next = [...board];
+    slots.forEach((slot, index) => {
+      next[slot] = values[index];
+    });
+    return next;
+  }
+  function reshuffleWholeBoard(board, random = Math.random) {
+    if (board.length < 2) return [...board];
+    for (let attempt = 0; attempt < 12; attempt++) {
+      const next2 = [...board];
+      for (let i = next2.length - 1; i > 0; i--) {
+        const j = Math.min(i, Math.floor(random() * (i + 1)));
+        [next2[i], next2[j]] = [next2[j], next2[i]];
+      }
+      if (next2.every((item, index) => item.id !== board[index].id)) return next2;
+    }
+    const next = [...board];
+    for (let i = next.length - 1; i > 0; i--) {
+      const j = Math.min(i - 1, Math.floor(random() * i));
+      [next[i], next[j]] = [next[j], next[i]];
+    }
+    return next;
+  }
+  function getSafeCellRatio(positions, size) {
+    let minimumDistance = Infinity;
+    let edgeRoom = Infinity;
+    for (let i = 0; i < positions.length; i++) {
+      const point = positions[i];
+      edgeRoom = Math.min(edgeRoom, point.x, 1 - point.x, point.y, 1 - point.y);
+      for (let j = 0; j < i; j++) minimumDistance = Math.min(minimumDistance, Math.hypot(point.x - positions[j].x, point.y - positions[j].y));
+    }
+    return Math.min(0.84 / size, minimumDistance * 0.85, edgeRoom * 1.8);
+  }
+
+  // src/board-view.js
+  var SPECIAL = /* @__PURE__ */ new Set(["irregular", "honeycomb", "rings"]);
+  var coord = (value) => (value * 1e3).toFixed(2);
+  function makeBoardGeometry(layout, size, positions) {
+    if (layout === "irregular") return makeVoronoiCells(positions);
+    if (layout === "honeycomb") return makeHoneycombCells(size);
+    if (layout === "rings") return makeRingSectors(size);
+    return null;
+  }
+  function cellClass(state2, cell) {
+    const found = state2.sequence.findIndex((item) => item.id === cell.id) < state2.index;
+    return "svg-cell ".concat(cell.color, " ").concat(found ? "found" : "");
+  }
+  function cellLabel(cell) {
+    return "".concat(cell.color === "red" ? "\u7EA2\u8272" : cell.color === "blue" ? "\u84DD\u8272" : "").concat(cell.value);
+  }
+  function polygonBoard(state2) {
+    const title = state2.layout === "irregular" ? "\u4E0D\u89C4\u5219\u5207\u5206" : "\u8702\u7A9D";
+    const font = Math.max(36, 84 - state2.size * 6);
+    const cells = state2.geometry.map((shape, index) => {
+      const cell = state2.board[index];
+      const points = shape.polygon.map((point) => "".concat(coord(point.x), ",").concat(coord(point.y))).join(" ");
+      return '<g class="'.concat(cellClass(state2, cell), '" data-id="').concat(cell.id, '" role="button" tabindex="').concat(state2.finished ? -1 : 0, '" aria-label="').concat(cellLabel(cell), '" aria-disabled="').concat(state2.finished, '"><polygon points="').concat(points, '"/><text x="').concat(coord(shape.center.x), '" y="').concat(coord(shape.center.y), '">').concat(cell.value, "</text></g>");
+    }).join("");
+    return '<svg class="shape-board layout-'.concat(state2.layout, '" viewBox="0 0 1000 1000" role="group" aria-label="').concat(title, "\uFF0C").concat(state2.size * state2.size, ' \u4E2A\u76EE\u6807" style="--svg-font:').concat(font, 'px">').concat(cells, "</svg>");
+  }
+  function ringBoard(state2) {
+    const font = Math.max(32, 88 - state2.size * 7);
+    const elapsed = state2.playing ? performance.now() - state2.startedAt : state2.elapsed;
+    const rings = [...new Set(state2.geometry.map((shape) => shape.ring))];
+    const content = rings.map((ring) => {
+      const shapes = state2.geometry.map((shape, slot) => ({ shape, slot })).filter((item) => item.shape.ring === ring);
+      const { duration, direction } = shapes[0].shape;
+      const phase = elapsed / 1e3 % duration;
+      const angle = direction * phase / duration * 360;
+      const motion = state2.playing ? "--duration:".concat(duration, "s;--offset:-").concat(phase.toFixed(3), "s") : "transform:rotate(".concat(angle.toFixed(3), "deg)");
+      const cells = shapes.map(({ shape, slot }) => {
+        const cell = state2.board[slot];
+        const x = coord(shape.center.x), y = coord(shape.center.y);
+        const labelMotion = state2.playing ? "" : "transform:rotate(".concat((-angle).toFixed(3), "deg);");
+        return '<g class="'.concat(cellClass(state2, cell), '" data-id="').concat(cell.id, '" role="button" tabindex="').concat(state2.finished ? -1 : 0, '" aria-label="').concat(cellLabel(cell), '" aria-disabled="').concat(state2.finished, '"><path d="').concat(shape.path, '"/><text class="ring-label" x="').concat(x, '" y="').concat(y, '" style="--ox:').concat(x, "px;--oy:").concat(y, "px;").concat(labelMotion, '">').concat(cell.value, "</text></g>");
+      }).join("");
+      return '<g class="ring-layer '.concat(state2.playing ? "spinning" : "", " ").concat(direction === 1 ? "forward" : "reverse", '" data-ring="').concat(ring, '" data-duration="').concat(duration, '" data-direction="').concat(direction, '" style="').concat(motion, '">').concat(cells, "</g>");
+    }).join("");
+    return '<svg class="shape-board ring-board" viewBox="0 0 1000 1000" role="group" aria-label="\u65CB\u8F6C\u5706\u73AF\uFF0C'.concat(state2.size * state2.size, ' \u4E2A\u76EE\u6807" style="--svg-font:').concat(font, 'px"><circle class="ring-center" cx="500" cy="500" r="67"/>').concat(content, "</svg>");
+  }
+  function renderSpecialBoard(state2) {
+    if (!SPECIAL.has(state2.layout)) return null;
+    return state2.layout === "rings" ? ringBoard(state2) : polygonBoard(state2);
+  }
+
+  // src/main.js
+  var app = document.querySelector("#app");
+  var modes = {
+    asc: { name: "\u987A\u5E8F\u6570\u5B57", hint: "\u6309 1 \u2192 N \u4F9D\u6B21\u70B9\u51FB" },
+    desc: { name: "\u5012\u5E8F\u6570\u5B57", hint: "\u4ECE\u6700\u5927\u6570\u5B57\u5012\u7740\u70B9\u51FB" },
+    alternate: { name: "\u7EA2\u84DD\u4EA4\u66FF", hint: "\u7EA2\u8272\u9012\u589E\uFF0C\u84DD\u8272\u9012\u51CF\uFF0C\u4EA4\u66FF\u70B9\u51FB" },
+    letters: { name: "\u5B57\u6BCD\u65B9\u683C", hint: "\u6309 A \u2192 Z \u4F9D\u6B21\u70B9\u51FB" }
+  };
+  var colors = [
+    { label: "\u7EA2", css: "#fa746d" },
+    { label: "\u84DD", css: "#73bcff" },
+    { label: "\u7EFF", css: "#b6f36a" },
+    { label: "\u9EC4", css: "#ffd476" }
+  ];
+  var state = { tab: "schulte", mode: "asc", layout: "classic", size: 5, positions: [], geometry: null, sequence: [], board: [], index: 0, errors: 0, startedAt: 0, elapsed: 0, playing: false, finished: false, showResult: false, breathStarted: 0, breathRunning: false, stroopStarted: 0, stroopRunning: false, stroopScore: 0, stroopQuestion: null, deferredInstall: null };
+  var ticker;
+  function savedHistory() {
+    try {
+      return JSON.parse(localStorage.getItem("focus-lab-history") || "[]").filter((x) => x && typeof x === "object");
+    } catch (e) {
+      return [];
+    }
+  }
+  function saveResult(entry) {
+    try {
+      localStorage.setItem("focus-lab-history", JSON.stringify([entry, ...savedHistory()].slice(0, 30)));
+    } catch (e) {
+    }
+  }
+  function bestFor(mode, size, layout) {
+    const times = savedHistory().filter((x) => x.type === "schulte" && x.mode === mode && x.size === size && (x.layout || "classic") === layout).map((x) => x.time);
+    return times.length ? formatTime(Math.min(...times)) : "\u2014";
+  }
+  function stopTicker() {
+    if (ticker) clearInterval(ticker);
+    ticker = void 0;
+  }
+  function resetGame() {
+    stopTicker();
+    state.sequence = makeSequence(state.mode, state.size);
+    state.board = shuffle(state.sequence);
+    state.positions = makeLayoutPositions(state.layout, state.size);
+    state.geometry = makeBoardGeometry(state.layout, state.size, state.positions);
+    state.index = 0;
+    state.errors = 0;
+    state.startedAt = 0;
+    state.elapsed = 0;
+    state.playing = false;
+    state.finished = false;
+    state.showResult = false;
+    render();
+  }
+  function startGame() {
+    state.startedAt = performance.now() - state.elapsed;
+    state.playing = true;
+    ticker = setInterval(() => {
+      state.elapsed = performance.now() - state.startedAt;
+      const timer = document.querySelector("#timer");
+      if (timer) timer.textContent = formatTime(state.elapsed);
+    }, 100);
+  }
+  function onCell(id) {
+    if (state.finished) return;
+    if (!state.playing) startGame();
+    const target = getNextTarget(state.sequence, state.index);
+    if ((target == null ? void 0 : target.id) !== id) {
+      state.errors++;
+      if (state.layout === "full-random") {
+        state.board = reshuffleWholeBoard(state.board);
+        render();
+        return;
+      }
+      if (state.layout === "rings") render();
+      const cell = [...document.querySelectorAll("[data-id]")].find((el) => el.dataset.id === id);
+      cell == null ? void 0 : cell.classList.add("wrong");
+      setTimeout(() => cell == null ? void 0 : cell.classList.remove("wrong"), 380);
+      document.querySelector("#errors").textContent = String(state.errors);
+      return;
+    }
+    state.index++;
+    if (state.layout === "dynamic" && state.index < state.sequence.length) state.board = reshuffleRemaining(state.board, state.sequence, state.index);
+    if (state.layout === "full-random" && state.index < state.sequence.length) state.board = reshuffleWholeBoard(state.board);
+    if (state.index === state.sequence.length) {
+      state.elapsed = performance.now() - state.startedAt;
+      state.playing = false;
+      state.finished = true;
+      state.showResult = true;
+      stopTicker();
+      saveResult({ type: "schulte", mode: state.mode, layout: state.layout, size: state.size, time: Math.round(state.elapsed), errors: state.errors, date: Date.now() });
+    }
+    render();
+  }
+  function targetMarkup(target) {
+    if (!target) return "\u5B8C\u6210";
+    return '<span class="target-dot '.concat(target.color, '"></span>').concat(target.value);
+  }
+  function schulteView() {
+    var _a;
+    const target = getNextTarget(state.sequence, state.index);
+    const layout = LAYOUTS.find((item) => item.id === state.layout);
+    const geometric = !["classic", "dynamic", "full-random"].includes(state.layout);
+    const cellRatio = state.geometry ? 0 : getSafeCellRatio(state.positions, state.size);
+    const cells = state.board.map((cell, slot) => {
+      const found = state.layout !== "full-random" && state.sequence.findIndex((item) => item.id === cell.id) < state.index;
+      const point = state.positions[slot];
+      const position = geometric ? 'style="--x:'.concat((point.x * 100).toFixed(2), "%;--y:").concat((point.y * 100).toFixed(2), "%;--cell-size:").concat((cellRatio * 100).toFixed(2), '%"') : "";
+      return '<button class="grid-cell '.concat(cell.color, " ").concat(found ? "found" : "", '" data-id="').concat(cell.id, '" aria-label="').concat(cell.color === "red" ? "\u7EA2\u8272" : cell.color === "blue" ? "\u84DD\u8272" : "").concat(cell.value, '" ').concat(position, " ").concat(state.finished ? "disabled" : "", ">").concat(cell.value, "</button>");
+    }).join("");
+    const boardMarkup = (_a = renderSpecialBoard(state)) != null ? _a : '<div class="game-grid size-'.concat(state.size, " layout-").concat(state.layout, " ").concat(geometric ? "geometric" : "", '" style="--size:').concat(state.size, '" aria-label="').concat(layout.name, "\uFF0C").concat(state.size * state.size, ' \u4E2A\u76EE\u6807">').concat(cells, "</div>");
+    return '<div class="section-heading"><div><div class="eyebrow">FOCUS / 01</div><h1>\u8212\u5C14\u7279\u65B9\u683C</h1><p>\u8DDF\u968F\u76EE\u6807\uFF0C\u9010\u683C\u627E\u56DE\u6CE8\u610F\u529B\u3002</p></div><div class="section-mark" aria-hidden="true">01<span>/03</span></div></div>\n    <div class="workspace">\n      <section class="control-panel" aria-label="\u8BAD\u7EC3\u8BBE\u7F6E">\n        <div class="panel-title">\u8BAD\u7EC3\u8BBE\u7F6E <span>01 \u2014 \u627E\u4EC0\u4E48</span></div>\n        <div class="mode-list">'.concat(Object.entries(modes).map(([key, mode]) => '<button class="mode-btn '.concat(state.mode === key ? "selected" : "", '" data-mode="').concat(key, '" aria-pressed="').concat(state.mode === key, '"><span class="mode-icon">').concat({ asc: "\u2197", desc: "\u2199", alternate: "\u25C9", letters: "Aa" }[key], "</span><span><strong>").concat(mode.name, "</strong><small>").concat(mode.hint, '</small></span><span class="mode-check">').concat(state.mode === key ? "\u25CF" : "\u25CB", "</span></button>")).join(""), '</div>\n        <div class="size-head"><span>\u76EE\u6807\u6570\u91CF</span><span>').concat(state.size, " \xD7 ").concat(state.size, " \xB7 ").concat(state.size * state.size, ' \u4E2A</span></div>\n        <div class="size-options">').concat([3, 4, 5, 6, 7, 8].map((size) => '<button class="size-btn '.concat(state.size === size ? "selected" : "", '" data-size="').concat(size, '" aria-pressed="').concat(state.size === size, '">').concat(size, "\xD7").concat(size, "</button>")).join(""), '</div>\n        <div class="layout-heading"><span>\u6392\u5E03\u6837\u5F0F</span><span>02 \u2014 \u600E\u4E48\u6392</span></div>\n        <div class="layout-list">').concat(LAYOUTS.map((item) => '<button class="layout-btn '.concat(state.layout === item.id ? "selected" : "", '" data-layout="').concat(item.id, '" aria-pressed="').concat(state.layout === item.id, '"><span class="layout-icon" aria-hidden="true">').concat(item.icon, "</span><span><strong>").concat(item.name, "</strong><small>").concat(item.hint, "</small></span></button>")).join(""), '</div>\n        <div class="tip"><span class="tip-icon">\u2726</span><span>').concat(state.layout === "full-random" ? "\u6BCF\u6B21\u70B9\u51FB\u90FD\u4F1A\u6253\u4E71\u5168\u90E8\u6570\u5B57\uFF0C\u70B9\u8FC7\u7684\u6570\u5B57\u4E5F\u4F1A\u518D\u6B21\u51FA\u73B0\u3002" : state.layout === "dynamic" ? "\u6BCF\u6B21\u70B9\u5BF9\u76EE\u6807\uFF0C\u5269\u4F59\u5185\u5BB9\u4F1A\u91CD\u65B0\u6392\u5217\u3002" : state.layout === "rings" ? "\u70B9\u4E2D\u7B2C\u4E00\u4E2A\u76EE\u6807\u540E\uFF0C\u5404\u73AF\u4F1A\u7F13\u6162\u4EA4\u66FF\u65CB\u8F6C\u3002" : "\u653E\u677E\u80A9\u8180\uFF0C\u8BA9\u89C6\u7EBF\u505C\u5728\u4E2D\u592E\uFF0C\u7528\u4F59\u5149\u5BFB\u627E\u4E0B\u4E00\u4E2A\u76EE\u6807\u3002", '</span></div>\n      </section>\n      <section class="game-panel ').concat(state.size >= 7 ? "dense" : "", '" aria-label="\u8212\u5C14\u7279\u8BAD\u7EC3">\n        <div class="game-top"><div><span class="stat-label">\u5F53\u524D\u76EE\u6807</span><div class="next-target" aria-live="polite">').concat(targetMarkup(target), '</div></div><div class="game-metrics"><div><span class="stat-label">\u7528\u65F6</span><strong id="timer">').concat(formatTime(state.elapsed), '</strong></div><div><span class="stat-label">\u5931\u8BEF</span><strong id="errors">').concat(state.errors, '</strong></div></div></div>\n        <div class="grid-wrap">').concat(boardMarkup, '</div>\n        <div class="game-footer"><div class="progress-copy"><span>').concat(state.finished ? "\u8BAD\u7EC3\u5B8C\u6210" : state.playing ? "\u4FDD\u6301\u8282\u594F" : "\u70B9\u51FB\u7B2C\u4E00\u4E2A\u76EE\u6807\u5F00\u59CB\u8BA1\u65F6", "</span><strong>").concat(state.index, " / ").concat(state.sequence.length, '</strong></div><div class="progress-track"><span style="width:').concat(state.index / state.sequence.length * 100, '%"></span></div><div class="game-actions"><button class="button-primary" id="restart">').concat(state.finished ? "\u518D\u6765\u4E00\u5C40" : "\u91CD\u65B0\u6392\u5217", " <span>\u2197</span></button><span>").concat(layout.name, "\u6700\u4F73 <b>").concat(bestFor(state.mode, state.size, state.layout), "</b></span></div></div>\n      </section>\n    </div>\n    ").concat(state.showResult ? '<div class="result-toast" role="status"><span>\u2726</span><div><strong>\u5B8C\u6210\u8FD9\u4E00\u8F6E</strong><small>'.concat(formatTime(state.elapsed), " \xB7 ").concat(state.errors, ' \u6B21\u5931\u8BEF</small></div><button id="dismiss-result" aria-label="\u5173\u95ED\u7ED3\u679C">\xD7</button></div>') : "");
+  }
+  function breathView() {
+    return '<div class="section-heading"><div><div class="eyebrow">FOCUS / 02</div><h1>\u547C\u5438\u91CD\u7F6E</h1><p>\u4E00\u5206\u949F\uFF0C\u7ED9\u601D\u7EEA\u4E00\u4E2A\u7F13\u51B2\u3002</p></div><div class="section-mark" aria-hidden="true">02<span>/03</span></div></div><div class="exercise-card breath-card"><div class="exercise-kicker">60 \u79D2 \xB7 4 \u79D2\u5438\u6C14 / 4 \u79D2\u547C\u6C14</div><div class="breath-visual"><div class="breath-ring '.concat(state.breathRunning ? "active" : "", '"><div class="breath-core"><span id="breath-phase">').concat(state.breathRunning ? "\u5438\u6C14" : "\u51C6\u5907\u597D\u4E86\u5417", '</span><strong id="breath-count">').concat(state.breathRunning ? "4" : "60", '</strong><small id="breath-unit">').concat(state.breathRunning ? "\u79D2" : "\u79D2\u7EC3\u4E60", '</small></div></div></div><p class="exercise-note">\u8DDF\u968F\u5706\u73AF\u7684\u8282\u594F\u547C\u5438\uFF0C\u6CE8\u610F\u7A7A\u6C14\u8FDB\u51FA\u8EAB\u4F53\u7684\u611F\u89C9\u3002</p><button class="button-primary exercise-action" id="breath-toggle">').concat(state.breathRunning ? "\u7ED3\u675F\u7EC3\u4E60" : "\u5F00\u59CB\u547C\u5438\u7EC3\u4E60", " <span>\u2197</span></button></div>");
+  }
+  function newStroopQuestion() {
+    let word = Math.floor(Math.random() * colors.length);
+    let ink = Math.floor(Math.random() * colors.length);
+    if (Math.random() < 0.75 && ink === word) ink = (ink + 1 + Math.floor(Math.random() * 3)) % colors.length;
+    state.stroopQuestion = { word, ink };
+  }
+  function stroopView() {
+    const q = state.stroopQuestion;
+    return '<div class="section-heading"><div><div class="eyebrow">FOCUS / 03</div><h1>\u989C\u8272\u5E72\u6270</h1><p>\u5FFD\u7565\u6587\u5B57\u542B\u4E49\uFF0C\u53EA\u5224\u65AD\u5B57\u7684\u989C\u8272\u3002</p></div><div class="section-mark" aria-hidden="true">03<span>/03</span></div></div><div class="exercise-card stroop-card"><div class="exercise-kicker">30 \u79D2 \xB7 \u9009\u62E9\u5B57\u4F53\u989C\u8272</div><div class="stroop-meta"><span>\u5269\u4F59 <strong id="stroop-time">'.concat(state.stroopRunning ? Math.max(0, Math.ceil(30 - (performance.now() - state.stroopStarted) / 1e3)) : "30", '</strong> \u79D2</span><span>\u6B63\u786E <strong id="stroop-score">').concat(state.stroopScore, '</strong> \u6B21</span></div><div class="stroop-word" id="stroop-word" style="color:').concat(q ? colors[q.ink].css : "#eef4f6", '">').concat(q ? colors[q.word].label : "\u989C\u8272", '</div><div class="stroop-options">').concat(colors.map((color, i) => '<button class="stroop-option" data-color="'.concat(i, '" ').concat(!state.stroopRunning ? "disabled" : "", '><span style="background:').concat(color.css, '"></span>').concat(color.label, "</button>")).join(""), '</div><p class="exercise-note">\u8BA9\u773C\u775B\u5148\u4E8E\u76F4\u89C9\u505A\u51FA\u5224\u65AD\u3002</p><button class="button-primary exercise-action" id="stroop-toggle">').concat(state.stroopRunning ? "\u7ED3\u675F\u7EC3\u4E60" : "\u5F00\u59CB\u6311\u6218", " <span>\u2197</span></button></div>");
+  }
+  function layoutName(id) {
+    var _a;
+    return id === "spiral" ? "\u87BA\u65CB\u8212\u5C14\u7279" : ((_a = LAYOUTS.find((layout) => layout.id === (id || "classic"))) == null ? void 0 : _a.name) || "\u6807\u51C6\u65B9\u683C";
+  }
+  function historyView() {
+    const history = savedHistory();
+    return '<div class="section-heading"><div><div class="eyebrow">YOUR PROGRESS</div><h1>\u8BAD\u7EC3\u8BB0\u5F55</h1><p>\u6BCF\u4E00\u6B21\u56DE\u5230\u5F53\u4E0B\uFF0C\u90FD\u503C\u5F97\u8BB0\u5F55\u3002</p></div></div><section class="history-panel">'.concat(history.length ? history.map((item) => {
+      var _a;
+      return '<div class="history-row"><span class="history-glyph">'.concat(item.type === "schulte" ? "\u25A6" : "\u25C9", "</span><div><strong>").concat(item.type === "schulte" ? "".concat(((_a = modes[item.mode]) == null ? void 0 : _a.name) || "\u8212\u5C14\u7279\u65B9\u683C", " \xB7 ").concat(item.size, " \xD7 ").concat(item.size, " \xB7 ").concat(layoutName(item.layout)) : "\u989C\u8272\u5E72\u6270", "</strong><small>").concat(new Date(item.date).toLocaleDateString("zh-CN", { year: "numeric", month: "long", day: "numeric" }), "</small></div><b>").concat(item.type === "schulte" ? formatTime(item.time) : "".concat(item.score, " \u6B21"), "</b></div>");
+    }).join("") : '<div class="empty-history"><span>\u2726</span><strong>\u8FD8\u6CA1\u6709\u8BAD\u7EC3\u8BB0\u5F55</strong><p>\u5B8C\u6210\u4E00\u5C40\u7EC3\u4E60\u540E\uFF0C\u6210\u7EE9\u4F1A\u4FDD\u5B58\u5728\u8FD9\u53F0\u8BBE\u5907\u4E0A\u3002</p></div>', "</section>");
+  }
+  function render() {
+    app.innerHTML = '<div class="app-shell"><header class="topbar"><button class="brand" data-tab="schulte" aria-label="\u8FD4\u56DE\u8212\u5C14\u7279\u65B9\u683C"><span class="brand-symbol"><i></i><i></i><i></i><i></i></span><span>\u805A\u7126<span class="brand-light">\u7EC3\u4E60\u5BA4</span><small>FOCUS LAB</small></span></button><div class="top-actions"><span class="offline-label"><span></span>\u968F\u65F6\u53EF\u7EC3</span><button class="install-btn" id="install-button" '.concat(state.deferredInstall ? "" : "hidden", '>\u5B89\u88C5\u5E94\u7528 \u2197</button></div></header><div class="layout"><nav class="sidebar" aria-label="\u8BAD\u7EC3\u5BFC\u822A"><div class="nav-label">\u7EC3\u4E60\u7A7A\u95F4</div><button class="nav-item ').concat(state.tab === "schulte" ? "active" : "", '" data-tab="schulte"><span>\u25A6</span>\u8212\u5C14\u7279\u65B9\u683C</button><button class="nav-item ').concat(state.tab === "breath" ? "active" : "", '" data-tab="breath"><span>\u25CC</span>\u547C\u5438\u91CD\u7F6E</button><button class="nav-item ').concat(state.tab === "stroop" ? "active" : "", '" data-tab="stroop"><span>\u25C9</span>\u989C\u8272\u5E72\u6270</button><div class="nav-separator"></div><div class="nav-label">\u6211\u7684\u7A7A\u95F4</div><button class="nav-item ').concat(state.tab === "history" ? "active" : "", '" data-tab="history"><span>\u25A4</span>\u8BAD\u7EC3\u8BB0\u5F55</button><div class="sidebar-bottom"><div class="mini-graphic"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div><strong>\u7ED9\u81EA\u5DF1\u4E00\u70B9\u7A7A\u95F4</strong><p>\u77ED\u77ED\u51E0\u5206\u949F\uFF0C\u91CD\u65B0\u627E\u56DE\u6E05\u6670\u7684\u8282\u594F\u3002</p></div></nav><main class="main-content">').concat(state.tab === "schulte" ? schulteView() : state.tab === "breath" ? breathView() : state.tab === "stroop" ? stroopView() : historyView(), '</main></div><nav class="mobile-nav" aria-label="\u79FB\u52A8\u7AEF\u8BAD\u7EC3\u5BFC\u822A"><button data-tab="schulte" class="').concat(state.tab === "schulte" ? "active" : "", '"><span>\u25A6</span>\u65B9\u683C</button><button data-tab="breath" class="').concat(state.tab === "breath" ? "active" : "", '"><span>\u25CC</span>\u547C\u5438</button><button data-tab="stroop" class="').concat(state.tab === "stroop" ? "active" : "", '"><span>\u25C9</span>\u989C\u8272</button><button data-tab="history" class="').concat(state.tab === "history" ? "active" : "", '"><span>\u25A4</span>\u8BB0\u5F55</button></nav></div>');
+  }
+  app.addEventListener("click", async (event) => {
+    const tab = event.target.closest("[data-tab]");
+    if (tab) {
+      if (state.tab !== tab.dataset.tab) {
+        if (state.playing) {
+          state.elapsed = performance.now() - state.startedAt;
+          state.playing = false;
+          stopTicker();
+        }
+        if (state.breathRunning) {
+          state.breathRunning = false;
+          stopTicker();
+        }
+        if (state.stroopRunning) finishStroop();
+        state.tab = tab.dataset.tab;
+      }
+      render();
+      return;
+    }
+    const mode = event.target.closest("[data-mode]");
+    if (mode) {
+      state.mode = mode.dataset.mode;
+      resetGame();
+      return;
+    }
+    const size = event.target.closest("[data-size]");
+    if (size) {
+      state.size = Number(size.dataset.size);
+      resetGame();
+      return;
+    }
+    const layout = event.target.closest("[data-layout]");
+    if (layout) {
+      state.layout = layout.dataset.layout;
+      resetGame();
+      return;
+    }
+    const cell = event.target.closest("[data-id]");
+    if (cell) {
+      onCell(cell.dataset.id);
+      return;
+    }
+    if (event.target.closest("#restart")) {
+      resetGame();
+      return;
+    }
+    if (event.target.closest("#dismiss-result")) {
+      state.showResult = false;
+      render();
+      return;
+    }
+    if (event.target.closest("#breath-toggle")) {
+      toggleBreath();
+      return;
+    }
+    if (event.target.closest("#stroop-toggle")) {
+      toggleStroop();
+      return;
+    }
+    const answer = event.target.closest("[data-color]");
+    if (answer && state.stroopRunning) {
+      if (Number(answer.dataset.color) === state.stroopQuestion.ink) state.stroopScore++;
+      newStroopQuestion();
+      render();
+      return;
+    }
+    if (event.target.closest("#install-button") && state.deferredInstall) {
+      state.deferredInstall.prompt();
+      await state.deferredInstall.userChoice;
+      state.deferredInstall = null;
+      render();
+    }
+  });
+  app.addEventListener("keydown", (event) => {
+    const cell = event.target.closest(".svg-cell[data-id]");
+    if (cell && (event.key === "Enter" || event.key === " ")) {
+      event.preventDefault();
+      onCell(cell.dataset.id);
+    }
+  });
+  function toggleBreath() {
+    if (state.breathRunning) {
+      state.breathRunning = false;
+      stopTicker();
+      render();
+      return;
+    }
+    state.breathRunning = true;
+    state.breathStarted = performance.now();
+    render();
+    ticker = setInterval(() => {
+      const elapsed = (performance.now() - state.breathStarted) / 1e3;
+      if (elapsed >= 60) {
+        state.breathRunning = false;
+        stopTicker();
+        render();
+        return;
+      }
+      const phase = Math.floor(elapsed / 4) % 2 === 0 ? "\u5438\u6C14" : "\u547C\u6C14";
+      const count = 4 - Math.floor(elapsed % 4);
+      document.querySelector("#breath-phase").textContent = phase;
+      document.querySelector("#breath-count").textContent = String(count);
+      document.querySelector("#breath-unit").textContent = "\u5269\u4F59 ".concat(Math.ceil(60 - elapsed), " \u79D2");
+    }, 100);
+  }
+  function toggleStroop() {
+    if (state.stroopRunning) {
+      finishStroop();
+      return;
+    }
+    state.stroopRunning = true;
+    state.stroopScore = 0;
+    state.stroopStarted = performance.now();
+    newStroopQuestion();
+    render();
+    ticker = setInterval(() => {
+      const remain = Math.max(0, Math.ceil(30 - (performance.now() - state.stroopStarted) / 1e3));
+      const el = document.querySelector("#stroop-time");
+      if (el) el.textContent = String(remain);
+      if (remain === 0) finishStroop();
+    }, 100);
+  }
+  function finishStroop() {
+    stopTicker();
+    state.stroopRunning = false;
+    state.stroopQuestion = null;
+    saveResult({ type: "stroop", score: state.stroopScore, date: Date.now() });
+    render();
+  }
+  window.addEventListener("beforeinstallprompt", (event) => {
+    event.preventDefault();
+    state.deferredInstall = event;
+    render();
+  });
+  window.addEventListener("appinstalled", () => {
+    state.deferredInstall = null;
+    render();
+  });
+  if ("serviceWorker" in navigator) window.addEventListener("load", () => navigator.serviceWorker.register("/sw.js").catch(() => {
+  }));
+  resetGame();
+})();
+</script>
+  </body>
+</html>
+
